@@ -6,7 +6,7 @@ import javax.ws.rs.Produces;
 
 import com.google.inject.servlet.RequestScoped;
 
-@Path("/helloworld")
+@Path("/")
 public class HelloWorldResource {
 
     @RequestScoped
