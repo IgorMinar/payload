@@ -32,7 +32,7 @@ public class Product {
 
     public Product(String name, List<String> blobKeys) {
         if (name == null || blobKeys == null)
-            new NullPointerException("Product can't be instantiated with nulls");
+            throw new NullPointerException("Product can't be instantiated with nulls");
 
         this.name = name;
         this.blobKeys = blobKeys;
