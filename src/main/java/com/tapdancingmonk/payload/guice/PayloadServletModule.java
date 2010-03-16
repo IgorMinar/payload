@@ -1,8 +1,11 @@
 package com.tapdancingmonk.payload.guice;
 
 import com.google.inject.servlet.ServletModule;
+import com.sun.jersey.api.core.PackagesResourceConfig;
 import com.sun.jersey.guice.spi.container.servlet.GuiceContainer;
-import com.tapdancingmonk.payload.HelloWorldResource;
+import com.sun.jersey.spi.container.servlet.WebComponent;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
@@ -12,8 +15,15 @@ public class PayloadServletModule extends ServletModule {
 
     @Override
     public void configureServlets() {
-        bind(HelloWorldResource.class); //TODO??
-        serve("/helloworld").with(GuiceContainer.class);
+        Map<String, String> guiceContainerParams = new HashMap<String, String>();
+        guiceContainerParams.put(WebComponent.RESOURCE_CONFIG_CLASS, PayloadConfig.class.getName());
+        serve("/helloworld").with(GuiceContainer.class, guiceContainerParams);
+    }
+
+    public static class PayloadConfig extends PackagesResourceConfig {
+        public PayloadConfig() {
+            super("com.tapdancingmonk.payload");
+        }
     }
 
 }
