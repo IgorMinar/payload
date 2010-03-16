@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
-    version="2.5">
-
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
     <listener>
-        <listener-class>com.tapdancingmonk.payload.PayloadConfig</listener-class>
+        <listener-class>com.tapdancingmonk.payload.guice.PayloadBooter</listener-class>
     </listener>
     <filter>
         <filter-name>Guice Filter</filter-name>
@@ -13,7 +11,6 @@
         <filter-name>Guice Filter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
-
     <security-constraint>
         <web-resource-collection>
             <url-pattern>/admin/index.jsp</url-pattern>
@@ -22,5 +19,4 @@
             <role-name>admin</role-name>
         </auth-constraint>
     </security-constraint>
-
 </web-app>

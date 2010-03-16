@@ -10,8 +10,9 @@
 
     <properties>
         <gae.version>1.3.1</gae.version>
-        <project_charset>UTF-8</project_charset>
         <guice.version>2.0</guice.version>
+        <datanucleus.version>1.1.5</datanucleus.version>
+        <project_charset>UTF-8</project_charset>
     </properties>
 
     <dependencies>
@@ -88,12 +89,12 @@
         <dependency>
             <groupId>org.datanucleus</groupId>
             <artifactId>datanucleus-core</artifactId>
-            <version>1.1.5</version>
+            <version>${datanucleus.version}</version>
         </dependency>
         <dependency>
             <groupId>org.datanucleus</groupId>
             <artifactId>datanucleus-jpa</artifactId>
-            <version>1.1.5</version>
+            <version>${datanucleus.version}</version>
         </dependency>
         <!--jstl -->
         <dependency>
@@ -189,6 +190,32 @@
                 <configuration>
                     <port>8081</port>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.datanucleus</groupId>
+                <artifactId>maven-datanucleus-plugin</artifactId>
+                <version>1.1.4</version>
+                <configuration>
+                   <api>JDO</api>
+                   <mappingIncludes>**/model/*.class</mappingIncludes>
+                   <!-- <log4jConfiguration>${basedir}/src/main/resources/log4j.properties</log4jConfiguration> -->
+                   <verbose>false</verbose>
+                </configuration>
+                <executions>
+                   <execution>
+                       <phase>process-classes</phase>
+                       <goals>
+                           <goal>enhance</goal>
+                       </goals>
+                   </execution>
+                </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.datanucleus</groupId>
+                        <artifactId>datanucleus-core</artifactId>
+                        <version>${datanucleus.version}</version>
+                    </dependency>
+                </dependencies>
             </plugin>
         </plugins>
     </build>
