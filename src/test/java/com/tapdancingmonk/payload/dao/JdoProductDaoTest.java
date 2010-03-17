@@ -1,8 +1,10 @@
-package com.tapdancingmonk.payload;
+package com.tapdancingmonk.payload.dao;
 
 import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.tools.development.testing.LocalDatastoreServiceTestConfig;
 import com.google.appengine.tools.development.testing.LocalServiceTestHelper;
+import com.tapdancingmonk.payload.dao.EntityNotFoundException;
+import com.tapdancingmonk.payload.dao.JdoProductDao;
 import com.tapdancingmonk.payload.model.Product;
 import javax.jdo.JDOHelper;
 import javax.jdo.PersistenceManagerFactory;

@@ -1,4 +1,4 @@
-package com.tapdancingmonk.payload;
+package com.tapdancingmonk.payload.dao;
 
 import com.google.appengine.api.datastore.KeyFactory;
 import com.google.inject.Inject;

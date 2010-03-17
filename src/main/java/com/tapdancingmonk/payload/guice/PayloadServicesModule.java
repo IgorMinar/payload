@@ -1,8 +1,8 @@
 package com.tapdancingmonk.payload.guice;
 
 import com.google.inject.AbstractModule;
-import com.tapdancingmonk.payload.JdoProductDao;
-import com.tapdancingmonk.payload.ProductDao;
+import com.tapdancingmonk.payload.dao.JdoProductDao;
+import com.tapdancingmonk.payload.dao.ProductDao;
 
 /**
  *

@@ -1,4 +1,4 @@
-package com.tapdancingmonk.payload;
+package com.tapdancingmonk.payload.dao;
 
 /**
  *
