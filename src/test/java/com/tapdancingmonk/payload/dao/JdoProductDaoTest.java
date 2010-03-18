@@ -67,7 +67,7 @@ public class JdoProductDaoTest {
 
         String id = KeyFactory.keyToString(pp.getKey());
         Product fp = dao.find(id);
-
+        
         dao.delete(fp);
 
         dao.find(id); //throws EntityNotFoundException
