@@ -34,7 +34,8 @@ public class JdoTransactionDao implements TransactionDao {
         try {
             return pm.getObjectById(Transaction.class, KeyFactory.stringToKey(id));
         } catch (JDOObjectNotFoundException ex) {
-            throw new EntityNotFoundException(String.format("entity with id $s doesn't exist", id), ex);
+            throw new EntityNotFoundException(
+                    String.format("entity with id %s doesn't exist", id), ex);
         } finally {
             pm.close();
         }
@@ -66,7 +67,8 @@ public class JdoTransactionDao implements TransactionDao {
             if (results.size() > 1) {
                 throw new DuplicateTransactionIdException();
             } else if (results.size() == 0) {
-                throw new EntityNotFoundException(String.format("transaction with txId $s doesn't exist", txId));
+                throw new EntityNotFoundException(
+                        String.format("transaction with txId %s doesn't exist", txId));
             } else {
                 txn = results.get(0);
             }

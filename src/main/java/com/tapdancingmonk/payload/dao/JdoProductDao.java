@@ -3,6 +3,7 @@ package com.tapdancingmonk.payload.dao;
 import com.google.appengine.api.datastore.KeyFactory;
 import com.google.inject.Inject;
 import com.tapdancingmonk.payload.model.Product;
+
 import javax.jdo.JDOObjectNotFoundException;
 import javax.jdo.PersistenceManager;
 import javax.jdo.PersistenceManagerFactory;
@@ -38,7 +39,7 @@ public class JdoProductDao implements ProductDao {
             return pm.getObjectById(Product.class, KeyFactory.stringToKey(id));
         } catch (JDOObjectNotFoundException ex) {
             throw new EntityNotFoundException(
-                        String.format("entity with id $s doesn't exist", id), ex);
+                        String.format("entity with id %s doesn't exist", id), ex);
         } finally {
             pm.close();
         }
