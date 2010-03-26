@@ -91,11 +91,6 @@ public class Transaction {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((emailAddress == null) ? 0 : emailAddress.hashCode());
-        result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
-        result = prime * result + ((key == null) ? 0 : key.hashCode());
-        result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
-        result = prime * result + ((product == null) ? 0 : product.hashCode());
         result = prime * result + ((transactionId == null) ? 0 : transactionId.hashCode());
         return result;
     }
