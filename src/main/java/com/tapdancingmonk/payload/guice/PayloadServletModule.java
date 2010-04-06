@@ -15,9 +15,9 @@ public class PayloadServletModule extends ServletModule {
 
     @Override
     public void configureServlets() {
-        Map<String, String> guiceContainerParams = new HashMap<String, String>();
-        guiceContainerParams.put(WebComponent.RESOURCE_CONFIG_CLASS, PayloadConfig.class.getName());
-        serve("/helloworld").with(GuiceContainer.class, guiceContainerParams);
+        Map<String, String> jerseyParams = new HashMap<String, String>();
+        jerseyParams.put(WebComponent.RESOURCE_CONFIG_CLASS, PayloadConfig.class.getName());
+        serve("/payload/*").with(GuiceContainer.class, jerseyParams);
     }
 
     public static class PayloadConfig extends PackagesResourceConfig {

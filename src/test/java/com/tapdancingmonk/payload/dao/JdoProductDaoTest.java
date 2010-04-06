@@ -3,9 +3,8 @@ package com.tapdancingmonk.payload.dao;
 import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.tools.development.testing.LocalDatastoreServiceTestConfig;
 import com.google.appengine.tools.development.testing.LocalServiceTestHelper;
-import com.tapdancingmonk.payload.dao.EntityNotFoundException;
-import com.tapdancingmonk.payload.dao.JdoProductDao;
 import com.tapdancingmonk.payload.model.Product;
+import java.util.List;
 import javax.jdo.JDOHelper;
 import javax.jdo.PersistenceManagerFactory;
 import org.junit.Before;
@@ -55,6 +54,23 @@ public class JdoProductDaoTest {
 
         assertThat("retrieved object matches the persisted one",
                 fp, is(pp));
+    }
+
+
+    @Test
+    public void testFindAll() {
+        Product p2 = dao.save(new Product("foo2", "bar2"));
+        Product p1 = dao.save(new Product("foo1", "bar1"));
+
+        List<Product> ps = dao.findAll();
+
+        assertThat("two objects where found",
+                ps.size(), is(2));
+        assertThat("retrieved object matches the persisted one",
+                p1, is(ps.get(0)));
+        assertThat("retrieved object matches the persisted one",
+                p2, is(ps.get(1)));
+
     }
 
 
