@@ -10,6 +10,8 @@
     <filter-mapping>
         <filter-name>Guice Filter</filter-name>
         <url-pattern>/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
     </filter-mapping>
     <security-constraint>
         <web-resource-collection>
