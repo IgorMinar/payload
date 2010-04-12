@@ -12,6 +12,7 @@ public class PayloadApp extends AbstractModule {
     protected void configure() {
         install(new PayloadServletModule());
         install(new PayloadGaeModule());
+        install(new PayloadServicesModule());
     }
 
 
