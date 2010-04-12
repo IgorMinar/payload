@@ -199,9 +199,11 @@
             <plugin>
                 <groupId>net.kindleit</groupId>
                 <artifactId>maven-gae-plugin</artifactId>
-                <version>0.5.5</version>
+                <version>0.5.7</version>
                 <configuration>
                     <port>8081</port>
+                    <debugPort>8000</debugPort>
+                    <debugSuspend>false</debugSuspend>
                 </configuration>
             </plugin>
             <plugin>
