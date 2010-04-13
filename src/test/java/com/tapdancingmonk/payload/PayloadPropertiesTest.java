@@ -15,7 +15,7 @@ public class PayloadPropertiesTest {
     
     @Test
     public void itShouldReturnAStringForReceiverEmail() {
-        String address = new DefaultPayloadProperties().getProperty(PayloadProperties.RECEIVER_EMAIL_KEY);
+        String address = new DefaultPayloadProperties().getReceiverEmail();
         assertNotNull(address);
         assertFalse(address.isEmpty());
     }
