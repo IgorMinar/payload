@@ -1,5 +1,10 @@
 package com.tapdancingmonk.payload;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+
 import javax.jdo.JDOHelper;
 import javax.jdo.PersistenceManagerFactory;
 
@@ -7,8 +12,6 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
-import org.mockito.internal.matchers.Equals;
-import org.mockito.internal.matchers.InstanceOf;
 
 import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.tools.development.testing.LocalDatastoreServiceTestConfig;
@@ -19,11 +22,6 @@ import com.tapdancingmonk.payload.dao.JdoTransactionDao;
 import com.tapdancingmonk.payload.dao.ProductDao;
 import com.tapdancingmonk.payload.dao.TransactionDao;
 import com.tapdancingmonk.payload.model.Product;
-import com.tapdancingmonk.payload.model.Transaction;
-
-import static org.mockito.Mockito.*; 
-import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.*;
 
 public class IpnListenerResourceTest {
 
@@ -36,6 +34,7 @@ public class IpnListenerResourceTest {
     private TransactionDao tDao;
     private ProductDao pDao;
     private IpnMessageHandler ipnHandler;
+    private PayloadProperties properties;
 
     @Before
     public void setUp() {
@@ -46,7 +45,9 @@ public class IpnListenerResourceTest {
         
         ipnHandler = mock(IpnMessageHandler.class);
         
-        ipnListener = new IpnListenerResource(pDao, tDao, ipnHandler);
+        properties = new DefaultPayloadProperties();
+        
+        ipnListener = new IpnListenerResource(pDao, tDao, ipnHandler, properties);
     }
     
     @Test(expected=EntityNotFoundException.class)
@@ -54,7 +55,7 @@ public class IpnListenerResourceTest {
         String fakeId = new KeyFactory.Builder("Product", 1).getString();
         
         ipnListener.receiveIpnMessage(fakeId, 
-                "foo", "bar", "baz", "spaz", "kaw", "wibble", "nonce");
+                "foo", "fop", "bar", "baz", "spaz", "kaw", "wibble", "nonce");
     }
     
     @Test
@@ -63,17 +64,14 @@ public class IpnListenerResourceTest {
         Product pp = pDao.save(p);
         
         ipnListener.receiveIpnMessage(KeyFactory.keyToString(pp.getKey()), 
-                "foo", "txId", "bar", "spaz", "kaw", "baz", "nonce");
+                "foo", "fop", "txId", "bar", "spaz", "kaw", "baz", "nonce");
         
         ArgumentCaptor<String> arg1 = ArgumentCaptor.forClass(String.class); 
-        ArgumentCaptor<Transaction> arg2 = ArgumentCaptor.forClass(Transaction.class); 
         
-        verify(ipnHandler).processIpnMessage(arg1.capture(), arg2.capture());
+        verify(ipnHandler).processIpnMessage(arg1.capture());
         
         assertThat("the first argument is nonce",
                 arg1.getValue(), is("nonce"));
-        assertThat("the second argument is our transaction",
-                arg2.getValue().getTransactionId(), is("txId"));
     }
     
     @Ignore // TODO implement validation of seller email

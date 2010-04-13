@@ -20,8 +20,8 @@ public class DefaultPayloadProperties implements PayloadProperties {
     /* (non-Javadoc)
      * @see com.tapdancingmonk.payload.PayloadProperties#getProperty(java.lang.String)
      */
-    public String getProperty(String name) {
-        return properties.getProperty(name);
+    public String getReceiverEmail() {
+        return properties.getProperty(RECEIVER_EMAIL_KEY);
     }
     
 }

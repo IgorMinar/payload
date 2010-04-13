@@ -1,14 +1,16 @@
 package com.tapdancingmonk.payload;
 
-import com.tapdancingmonk.payload.model.Transaction;
 
 public class DefaultIpnMessageHandler implements IpnMessageHandler {
 
-    public void processIpnMessage(String message, Transaction txn) {
+    public boolean processIpnMessage(String message) {
         
         // TODO implement back office
-        //  1. send message back to paypal
-        //  2. receive VERIFIED or INVALID and set tx state
+        //  1. check receiver address is correct
+        //  2. send message back to paypal
+        //  3. receive VERIFIED or INVALID and return true or false
+        
+        return false;
         
     }
 
